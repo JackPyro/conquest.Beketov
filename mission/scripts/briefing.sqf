@@ -1,4 +1,7 @@
 //0 = [] execVM "mission\scripts\briefing.sqf";
 
-private _missionBriefing = "Mission Briefing<br/><br/><img height=128 image='klpq_framework\logo.paa'/><br/>";
+private _missionBriefing = "Брифинг
+<br/><br/>
+2025 год. Королевство Рустовия.
+<br/>";
 player createDiaryRecord ["diary", ["Mission", _missionBriefing]];
