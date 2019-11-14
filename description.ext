@@ -15,7 +15,7 @@ respawn = 3;
 respawnDelay = 30;
 respawnTemplates[] = {};
 
-onLoadName = "Framework";
+onLoadName = "A1C1 Explosive Work";
 onLoadMission = "";
 author = "KLPQ";
 loadScreen = "klpq_framework\logo.paa";
