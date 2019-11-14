@@ -5,14 +5,14 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=1025;
 	class ItemIDProvider
 	{
-		nextID=1374;
+		nextID=1382;
 	};
 	class MarkerIDProvider
 	{
-		nextID=2;
+		nextID=6;
 	};
 	class LayerIndexProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={6284.2368,95.552658,6829.9048};
-		dir[]={-0.56525904,-0.80522162,0.1794277};
-		up[]={-0.76758409,0.59282714,0.24364969};
-		aside[]={0.30256057,-4.8615038e-007,0.95317614};
+		pos[]={11324.027,42.443378,7702.1348};
+		dir[]={-0.61943018,-0.49018133,-0.6132232};
+		up[]={-0.34835339,0.87161994,-0.34486285};
+		aside[]={-0.70354068,4.8428774e-008,0.71066302};
 	};
 };
 binarizationWanted=0;
@@ -40,13 +40,15 @@ addons[]=
 	"ace_parachute",
 	"klpq_framework",
 	"A3_Ui_F",
-	"A3_Structures_F_Civ_Accessories"
+	"A3_Structures_F_Civ_Accessories",
+	"CUP_Weapons_AmmoBoxes",
+	"A3_Modules_F_Curator_Misc"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=10;
+		items=11;
 		class Item0
 		{
 			className="A3_Modules_F_Curator";
@@ -116,6 +118,11 @@ class AddonsMetaData
 			name="Arma 3 - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item10
+		{
+			className="CUP_Weapons_AmmoBoxes";
+			name="CUP_Weapons_AmmoBoxes";
 		};
 	};
 };
@@ -404,7 +411,6 @@ class Mission
 	class Intel
 	{
 		briefingName="Conquest";
-		resistanceWest=0;
 		timeOfChanges=28800;
 		startWeather=0;
 		startWind=0;
@@ -425,7 +431,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=15;
+		items=22;
 		class Item0
 		{
 			dataType="Logic";
@@ -3033,7 +3039,7 @@ class Mission
 		class Item13
 		{
 			dataType="Marker";
-			position[]={6441.666,87394152,6839.9941};
+			position[]={6219.6865,87394152,6818.3281};
 			name="base_marker_east";
 			text="BASE";
 			type="mil_start";
@@ -3080,6 +3086,108 @@ class Mission
 				};
 				nAttributes=1;
 			};
+		};
+		class Item15
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={8815.3535,17.91547,5727.5479};
+				angles[]={0,1.5818617,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="box_1";
+			};
+			id=1375;
+			type="CUP_RUOrdnanceBox";
+		};
+		class Item16
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={8817.4883,17.91547,5727.4048};
+				angles[]={0,1.5818617,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="box_2";
+			};
+			id=1376;
+			type="CUP_RUOrdnanceBox";
+		};
+		class Item17
+		{
+			dataType="Marker";
+			position[]={8797.7705,6.6549406,5671.3066};
+			name="marker_2";
+			markerType="ELLIPSE";
+			type="ellipse";
+			colorName="ColorRed";
+			a=73.373047;
+			b=76.50293;
+			id=1377;
+		};
+		class Item18
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={8354.7334,13.614012,6151.6709};
+			};
+			areaSize[]={2808.0903,0,1419.3796};
+			areaIsRectangle=1;
+			flags=1;
+			id=1378;
+			type="ModuleCoverMap_F";
+			atlOffset=3.0606117;
+		};
+		class Item19
+		{
+			dataType="Marker";
+			position[]={6233.6631,32.775002,6787.5771};
+			name="marker_3";
+			markerType="RECTANGLE";
+			type="rectangle";
+			colorName="ColorEAST";
+			a=114.84204;
+			b=153.57428;
+			angle=271.70947;
+			id=1379;
+			atlOffset=7.6073055;
+		};
+		class Item20
+		{
+			dataType="Marker";
+			position[]={8150.3398,29.462,4512.3848};
+			name="marker_4";
+			markerType="RECTANGLE";
+			type="rectangle";
+			colorName="ColorWEST";
+			a=461.46039;
+			b=690.19659;
+			angle=344.13965;
+			id=1380;
+			atlOffset=-0.14045334;
+		};
+		class Item21
+		{
+			dataType="Marker";
+			position[]={8909.165,6.1290002,5606.0068};
+			name="marker_5";
+			markerType="RECTANGLE";
+			type="rectangle";
+			colorName="ColorGUER";
+			a=492.50299;
+			b=311.91501;
+			angle=342.09698;
+			id=1381;
+			atlOffset=-0.72541571;
 		};
 	};
 };
