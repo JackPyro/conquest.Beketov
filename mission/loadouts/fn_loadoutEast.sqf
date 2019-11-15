@@ -34,28 +34,30 @@ private _vest = ["SP_OpforRig1_Black","CUP_V_OI_TKI_Jacket2_04","CFP_AK_VEST_Bla
 private _face = ["CFP_Shemagh_Half_Black","CFP_Face_Wear_Blk","CFP_Beard_Red","CFP_Beard_Grey",""];
 
 
-private _czAmmo = ["CUP_1Rnd_B_CZ584_74Pellets","CUP_1Rnd_B_CZ584_74Slug"];
+private _czAmmo = ["CUP_1Rnd_B_CZ584_74Pellets","CUP_1Rnd_B_CZ584_74Pellets","CUP_1Rnd_B_CZ584_74Slug"];
 
 
 private _gun =  [
-	["CUP_sgun_CZ584",[[selectRandom _czAmmo,15]],[]],
+	["CUP_sgun_CZ584",[[selectRandom _czAmmo,15], ["CUP_1Rnd_762x51_CZ584", 10]],[]],
     ["hlc_rifle_M1903A1",[["hlc_5rnd_3006_1903",15]],[]],
     ["rhs_weap_makarov_pm",[["rhs_mag_9x18_8_57N181S",15]],[]]
 ];
 
 _riflemanFashion = ["CUP_U_O_SLA_Overalls_Tank",selectRandom _vest,"SP_Hood_Black","SP_Carryall_Black",selectRandom _face];
 _riflemanPrimary = ["arifle_MX_F", [["30Rnd_65x39_caseless_mag", 15]], []];
+_medicFashion = ["CUP_U_O_SLA_Overalls_Tank",selectRandom _vest,"SP_Hood_Black","rhs_medic_bag",selectRandom _face];
+_engieFashion = ["CUP_U_O_SLA_Overalls_Tank",selectRandom _vest,"SP_Hood_Black","rhs_assault_umbts_engineer_empty",selectRandom _face];
 
 
 _leaderFashion = ["CUP_U_O_SLA_Overalls_Tank","CFP_Alice_Vest2_Black","rhs_altyn_novisor","CUP_B_AssaultPack_Black",selectRandom _face];
-_leaderPrimary = ["CUP_sgun_CZ584",[[selectRandom _czAmmo,15]],[]];
-_handgunWeapon = ["rhs_weap_makarov_pm",[["rhs_mag_9x18_8_57N181S",15]],[]],
+_leaderPrimary = ["CUP_sgun_CZ584",[[selectRandom _czAmmo,15],["CUP_1Rnd_762x51_CZ584", 10]],[]];
+_handgunWeapon = ["rhs_weap_makarov_pm",[["rhs_mag_9x18_8_57N181S",15]],[]];
 
 
 
 _TlFashion = ["CUP_U_O_SLA_Overalls_Tank","CFP_Tactical1_White2","CUP_H_PMC_Beanie_Winter","CFP_RPGPack_White",selectRandom _face];
-_TlPrimary = ["CUP_sgun_CZ584",[[selectRandom _czAmmo,15]],[]];
-_Tlhandgun = ["rhs_weap_makarov_pm",[["rhs_mag_9x18_8_57N181S",15]],[]],
+_TlPrimary = ["CUP_sgun_CZ584",[[selectRandom _czAmmo,15],["CUP_1Rnd_762x51_CZ584", 10]],[]];
+_Tlhandgun = ["rhs_weap_makarov_pm",[["rhs_mag_9x18_8_57N181S",15]],[]];
 
 
 
@@ -114,17 +116,17 @@ private _loadoutArray = [
 		[
             ["combat life saver"],
             [
-                _riflemanFashion,
-                [selectRandom _gun]
+                _medicFashion,
+                [_handgunWeapon]
             ]
-        ],
+        ],  
         [
             ["engineer"],
             [
-                _riflemanFashion,
-                [selectRandom _gun]
+                _engieFashion,
+                [_handgunWeapon]
             ]
-        ],
+        ],        
         [
             ["team leader"],
             [
@@ -139,57 +141,8 @@ private _loadoutArray = [
                 _riflemanFashion,
                 [selectRandom _gun]
             ]
-        ],
-		[
-            ["missile specialist (at)" ],
-            [
-                 _riflemanFashion,
-                [selectRandom _gun]
-            ]
-        ],
-        [
-            ["missile specialist (aa)"],
-            [
-                 _riflemanFashion,
-                [selectRandom _gun]
-            ]
-        ],
-        [
-            ["autorifleman"],
-            [
-                 _riflemanFashion,
-                [selectRandom _gun]
-            ]
-        ],
-        [
-            ["rifleman (at)"],
-            [
-                 _riflemanFashion,
-                [selectRandom _gun]
-            ]
-        ],
-        [
-            ["pilot", "helicopter pilot"],
-            [
-                 _riflemanFashion,
-                [selectRandom _gun]
-            ]
-        ],
-        [
-            ["crewman", "helicopter crew"],
-            [
-                 _riflemanFashion,
-                [selectRandom _gun]
-            ]
-        ],
-		
-        [
-            ["grenadier"],
-            [
-                 _riflemanFashion,
-                [selectRandom _gun]
-            ]
         ]
+		
     ], //equipment per class
     [
         [
