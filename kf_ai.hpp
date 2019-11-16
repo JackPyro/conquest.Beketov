@@ -12,7 +12,7 @@ class KF_AI {
         };
 
         class WEST {
-            infantry[] = {"B_Soldier_SL_F", "B_medic_F", "B_engineer_F", "B_soldier_TL_F", "B_soldier_AT_F", "B_soldier_AA_F", "B_soldier_AR_F", "B_soldier_LAT_F", "B_soldier_GL_F", "B_soldier_M_F", "B_Soldier_F"};
+            infantry[] = {"B_Soldier_SL_F", "B_medic_F", "B_engineer_F", "B_soldier_TL_F", "B_soldier_AT_F", "B_soldier_AA_F", "B_soldier_AR_F", "B_soldier_LAT_F", "B_soldier_GL_F", "B_Soldier_F"};
             crew[] = {"B_crew_F", "B_Helipilot_F"};
             wheeled[] = {"B_MRAP_01_F"};
             armored[] = {"B_APC_Wheeled_01_cannon_F", "B_MBT_01_TUSK_F"};
@@ -21,7 +21,7 @@ class KF_AI {
         };
 
         class GUER {
-            infantry[] = {"I_Soldier_SL_F", "I_medic_F", "I_engineer_F", "I_soldier_TL_F", "I_Soldier_AT_F", "I_soldier_AA_F", "I_soldier_AR_F", "I_soldier_LAT_F", "I_soldier_GL_F", "I_soldier_M_F", "I_Soldier_F"};
+            infantry[] = {"I_Soldier_SL_F", "I_medic_F", "I_engineer_F", "I_soldier_TL_F", "I_Soldier_AT_F", "I_soldier_AA_F", "I_soldier_AR_F", "I_soldier_LAT_F", "I_soldier_GL_F", "I_Soldier_F"};
             crew[] = {"I_crew_F", "I_Helipilot_F"};
             wheeled[] = {"I_MRAP_03_F"};
             armored[] = {"I_APC_Wheeled_03_cannon_F", "I_MBT_03_cannon_F"};
