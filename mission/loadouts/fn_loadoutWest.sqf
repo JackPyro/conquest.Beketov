@@ -1,234 +1,526 @@
-//place all mission related stuff here
-//do not overwrite this file when copying framework from mission to mission
+private _basicMedicine = ["ACE_fieldDressing", 20], ["ACE_morphine", 10], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1];
 
-private ["_basicMedicine", "_advancedMedicine", "_medicine", "_basicMedicMedicine", "_advancedMedicMedicine", "_medicMedicine"];
-private ["_riflemanFashion", "_specFashion", "_leaderFashion", "_crewFashion", "_pilotFashion", "_medicMedicine"];
-private ["_riflemanPrimary", "_specPrimary", "_glRifleWeapon", "_leaderPrimary", "_mgWeapon", "_handgunWeapon", "_leaderSecond", "_atLauncherWeapon", "_atMissileWeapon", "_aaMissileWeapon", "_binoculars"];
-private ["_items", "_linkItems", "_boxItems", "_boxMedicine"];
+private _advancedMedicine = ["ACE_fieldDressing", 10], ["ACE_quikclot", 10], ["ACE_morphine", 10], ["ACE_epinephrine", 2], ["ACE_tourniquet", 1], ["ACE_personalAidKit", 1], ["ACE_bloodIV_250", 1];
 
-_basicMedicine = [["ACE_fieldDressing", 20], ["ACE_morphine", 10], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1]];
-_advancedMedicine = [["ACE_fieldDressing", 10], ["ACE_quikclot", 10], ["ACE_morphine", 10], ["ACE_epinephrine", 2], ["ACE_tourniquet", 1], ["ACE_personalAidKit", 1], ["ACE_bloodIV_250", 1]];
+private _medicine = [["ACE_fieldDressing", 20], ["ACE_morphine", 10], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1]];
 
-_medicine = _basicMedicine;
+private _medicItems = [["ACE_fieldDressing", 40], ["ACE_morphine", 20], ["ACE_epinephrine", 4], ["ACE_bloodIV_250", 2]];
 
-_basicMedicMedicine = [["ACE_fieldDressing", 40], ["ACE_morphine", 20], ["ACE_epinephrine", 4], ["ACE_bloodIV_250", 2]];
-_advancedMedicMedicine = [["ACE_fieldDressing", 20], ["ACE_quikclot", 20], ["ACE_morphine", 20], ["ACE_epinephrine", 4], ["ACE_tourniquet", 2], ["ACE_personalAidKit", 2], ["ACE_bloodIV_250", 2]];
 
-_medicMedicine = _basicMedicMedicine;
 
-private _uniform = "U_B_CombatUniform_mcam";
-private _vest = "V_BandollierB_rgr";
-_riflemanFashion = [_uniform, _vest, "H_HelmetB_sand", "B_Kitbag_cbr", ""];
-_specFashion = [_uniform, _vest, "H_HelmetB_sand", "B_Carryall_mcamo", ""];
-_leaderFashion = [_uniform, _vest, "H_MilCap_mcamo", "B_Kitbag_cbr", ""];
-_pilotFashion = [_uniform, _vest, "H_PilotHelmetHeli_B", "B_Kitbag_cbr", ""];
-_crewFashion = [_uniform, _vest, "H_HelmetCrew_B", "B_Kitbag_cbr", ""];
+private _squadLeaderFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_engineer", "rhs_fieldcap_vsr", "rhs_assault_umbts", ""];
 
-_riflemanPrimary = ["arifle_MX_F", [["30Rnd_65x39_caseless_mag", 15]], []];
-_specPrimary = ["arifle_MXC_F", [["30Rnd_65x39_caseless_mag", 15]], []];
-_glRifleWeapon = ["arifle_MX_GL_F", [["30Rnd_65x39_caseless_mag", 15], ["1Rnd_HE_Grenade_shell", 15]], ["optic_Aco"]];
-_leaderPrimary = _glRifleWeapon;
+private _squadLeaderPrimary = ["rhs_weap_akm_gp25",[["rhs_30Rnd_762x39mm_bakelite",15]],["rhs_acc_dtkakm"]];
 
-private _mgMag = "100Rnd_65x39_caseless_mag_Tracer";
-_mgWeapon = ["arifle_MX_SW_F", [[_mgMag, 15]], ["bipod_01_F_snd"]];
-private _mgMags = ["", [[_mgMag, 7]], []];
+private _squadLeaderSecondary = ["rhs_weap_makarov_pm",[["rhs_mag_9x18_8_57N181S",4]],[]];
 
-_handgunWeapon = ["hgun_P07_F", [["16Rnd_9x21_Mag", 1]], []];
-_leaderSecond = _handgunWeapon;
+private _squadLeaderLauncher = [];
 
-private _atLauncher = "launch_NLAW_F";
+private _squadLeaderItems = [["Binocular", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
 
-_atLauncherWeapon = [_atLauncher, [], []];
-_atMissileWeapon = ["launch_B_Titan_short_F", [["Titan_AT", 2]], []];
-_aaMissileWeapon = ["launch_B_Titan_F", [["Titan_AA", 2]], []];
+private _squadLeaderLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
 
-_binoculars = ["ACE_VectorDay", [], []];
 
-private _additionGrenade = "SmokeShellBlue";
-private _fragGrenade = "HandGrenade";
 
-_items = [["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], [_additionGrenade, 3], ["ACE_CableTie", 2]];
-_linkItems = ["ItemMap", "ItemCompass", "ItemWatch", "ItemGPS", "NVGoggles"];
+private _combatLifeSaverFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_medic", "rhs_6b26", "rhs_assault_umbts", ""];
 
-_boxItems = [
-    ["ToolKit", 10],
-    ["ACE_wirecutter", 2],
-    ["ACE_SpareBarrel", 10],
-    ["ACE_CableTie", 80],
-    ["ACE_Clacker", 10],
-    ["murshun_cigs_cigpack", 40],
-    ["murshun_cigs_matches", 40],
-    [_atLauncher, 20],
-    [_additionGrenade, 200],
-    [_fragGrenade, 80],
-    ["DemoCharge_Remote_Mag", 20],
-    ["SatchelCharge_Remote_Mag", 4]
-]; //content for boxes
+private _combatLifeSaverPrimary = ["rhs_weap_aks74u",[["rhs_30Rnd_545x39_7N6M_AK",15]],["rhs_acc_pgs64_74u"]];
 
-_boxMedicine = _medicine apply {[_x select 0, (_x select 1) * 60]};
+private _combatLifeSaverSecondary = [];
 
-private _identity = [
-    "", //face
-    "" //voice
-]; //identity, ai only
+private _combatLifeSaverLauncher = [];
+
+private _combatLifeSaverItems = [["true", 1], ["ACE_fieldDressing", 40], ["ACE_morphine", 20], ["ACE_epinephrine", 4], ["ACE_bloodIV_250", 2], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _combatLifeSaverLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _engineerFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_engineer", "rhs_6b26", "rhs_assault_umbts", ""];
+
+private _engineerPrimary = ["rhs_weap_aks74u",[["rhs_30Rnd_545x39_7N6M_AK",15]],["rhs_acc_pgs64_74u"]];
+
+private _engineerSecondary = [];
+
+private _engineerLauncher = [];
+
+private _engineerItems = [["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _engineerLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _teamLeaderFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_engineer", "rhs_fieldcap_vsr", "rhs_assault_umbts", ""];
+
+private _teamLeaderPrimary = ["rhs_weap_akm_gp25",[["rhs_30Rnd_762x39mm_bakelite",15]],["rhs_acc_dtkakm"]];
+
+private _teamLeaderSecondary = ["rhs_weap_makarov_pm",[["rhs_mag_9x18_8_57N181S",4]],[]];
+
+private _teamLeaderLauncher = [];
+
+private _teamLeaderItems = [["Binocular", 1], ["true", 1], ["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _teamLeaderLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _missileSpecialistATFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_engineer", "rhs_6b26_ess_bala", "rhs_rpg_empty", ""];
+
+private _missileSpecialistATPrimary = ["rhs_weap_akm",[["rhs_30Rnd_762x39mm_bakelite",15]],["rhs_acc_dtkakm"]];
+
+private _missileSpecialistATSecondary = [];
+
+private _missileSpecialistATLauncher = ["rhs_weap_rpg7",[["rhs_rpg7_PG7V_mag",2]],[]];
+
+private _missileSpecialistATItems = [["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _missileSpecialistATLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _missileSpecialistAAFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_engineer", "rhs_6b26_ess_bala", "rhs_rpg_empty", ""];
+
+private _missileSpecialistAAPrimary = ["rhs_weap_akm",[["rhs_30Rnd_762x39mm_bakelite",15]],["rhs_acc_dtkakm"]];
+
+private _missileSpecialistAASecondary = [];
+
+private _missileSpecialistAALauncher = ["CUP_launch_Igla_Loaded",[["CUP_Igla_M",2]],[]];
+
+private _missileSpecialistAAItems = [["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _missileSpecialistAALinkItems = ["ItemGPS", "ItemMap"];
+
+
+
+private _autoriflemanFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_engineer", "rhs_6b26_ess_bala", "rhs_assault_umbts", ""];
+
+private _autoriflemanPrimary = ["rhs_weap_pkm",[["rhs_100Rnd_762x54mmR",15]],[]];
+
+private _autoriflemanSecondary = [];
+
+private _autoriflemanLauncher = [];
+
+private _autoriflemanItems = [["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _autoriflemanLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _riflemanATFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_engineer", "rhs_6b26_ess_bala", "rhs_assault_umbts", ""];
+
+private _riflemanATPrimary = ["rhs_weap_akm",[["rhs_30Rnd_762x39mm_bakelite",15]],["rhs_acc_dtkakm"]];
+
+private _riflemanATSecondary = [];
+
+private _riflemanATLauncher = ["rhs_weap_rpg26",[["rhs_rpg26_mag",2]],[]];
+
+private _riflemanATItems = [["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _riflemanATLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _pilotFashion = ["rhs_uniform_df15_tan", "rhs_vydra_3m", "rhs_zsh7a", "rhs_d6_Parachute_backpack", ""];
+
+private _pilotPrimary = [];
+
+private _pilotSecondary = ["CUP_hgun_SA61",[["CUP_10Rnd_B_765x17_Ball_M",4]],[]];
+
+private _pilotLauncher = [];
+
+private _pilotItems = [["true", 1], ["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _pilotLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _crewmanFashion = ["rhs_uniform_gorka_r_y", "rhs_6b23_crew", "rhs_tsh4_ess_bala", "", ""];
+
+private _crewmanPrimary = ["rhs_weap_aks74u",[["rhs_30Rnd_545x39_7N6M_AK",15]],["rhs_acc_pgs64_74u"]];
+
+private _crewmanSecondary = ["rhs_weap_pya",[["rhs_mag_9x19_17",4]],[]];
+
+private _crewmanLauncher = [];
+
+private _crewmanItems = [["Binocular", 1], ["true", 1], ["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _crewmanLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _grenadierFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_rifleman", "rhs_6b26_bala_green", "rhs_assault_umbts", ""];
+
+private _grenadierPrimary = ["rhs_weap_akm_gp25",[["rhs_30Rnd_762x39mm_bakelite",15],["rhs_VOG25",15]],["rhs_acc_dtkakm"]];
+
+private _grenadierSecondary = [];
+
+private _grenadierLauncher = [];
+
+private _grenadierItems = [["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _grenadierLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+private _riflemanFashion = ["rhs_uniform_flora_patchless", "rhs_6b23_rifleman", "rhs_6b26_bala_green", "rhs_assault_umbts", ""];
+
+private _riflemanPrimary = ["rhs_weap_akm",[["rhs_30Rnd_762x39mm_bakelite",15]],["rhs_acc_dtkakm"]];
+
+private _riflemanSecondary = ["CUP_hgun_SA61",[["CUP_10Rnd_B_765x17_Ball_M",4]],[]];
+
+private _riflemanLauncher = [];
+
+private _riflemanItems = [["true", 1], ["ACE_fieldDressing", 10], ["ACE_morphine", 6], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1], ["rhs_100Rnd_762x54mmR,15", 2], ["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], ["SmokeShellBlue", 3], ["HandGrenade", 1], ["ACE_CableTie", 2]];
+
+private _riflemanLinkItems = ["ItemCompass", "ItemGPS", "ItemMap"];
+
+
+
+
+
+ private _boxItems = [["ToolKit", 10], ["ACE_wirecutter", 2], ["ACE_SpareBarrel", 10], ["ACE_CableTie", 20], ["ACE_Clacker", 10], ["murshun_cigs_cigpack", 40], ["murshun_cigs_matches", 40], ["DemoCharge_Remote_Mag", 20], ["SatchelCharge_Remote_Mag", 4], ["HandGrenade", 20], ["SmokeShellBlue", 20]];
+
+
+
+private _boxMedicine = [["ACE_fieldDressing", 20], ["ACE_morphine", 10], ["ACE_epinephrine", 2], ["ACE_bloodIV_250", 1]];
+
+
 
 private _loadoutArray = [
-    [
-        [
-            ["officer", "squad leader"],
-            [
-                _leaderFashion,
-                [_leaderPrimary, _leaderSecond, _binoculars]
-            ]
-        ],
-        [
-            ["combat life saver"],
-            [
-                _specFashion,
-                [_specPrimary]
-            ]
-        ],
-        [
-            ["engineer"],
-            [
-                _specFashion,
-                [_specPrimary]
-            ]
-        ],
-        [
-            ["team leader"],
-            [
-                _riflemanFashion,
-                [_leaderPrimary, _leaderSecond, _binoculars]
-            ]
-        ],
-        [
-            ["missile specialist (at)"],
-            [
-                _specFashion,
-                [_specPrimary, _atMissileWeapon]
-            ]
-        ],
-        [
-            ["missile specialist (aa)"],
-            [
-                _specFashion,
-                [_specPrimary, _aaMissileWeapon]
-            ]
-        ],
-        [
-            ["autorifleman"],
-            [
-                _riflemanFashion,
-                [_mgWeapon]
-            ]
-        ],
-        [
-            ["rifleman (at)"],
-            [
-                _riflemanFashion,
-                [_riflemanPrimary, _mgMags, _atLauncherWeapon]
-            ]
-        ],
-        [
-            ["pilot", "helicopter pilot"],
-            [
-                _pilotFashion,
-                [_specPrimary]
-            ]
-        ],
-        [
-            ["crewman", "helicopter crew"],
-            [
-                _crewFashion,
-                [_specPrimary]
-            ]
-        ],
-        [
-            ["grenadier"],
-            [
-                _riflemanFashion,
-                [_glRifleWeapon]
-            ]
-        ],
-        [
-            ["rifleman"],
-            [
-                _riflemanFashion,
-                [_riflemanPrimary]
-            ]
-        ]
-    ], //equipment per class
-    [
-        [
-            ["all"],
-            [["ACRE_PRC343", 1]],
-            []
-        ],
-        [
-            ["officer", "squad leader", "team leader", "pilot", "crewman"],
-            [["ACRE_PRC152", 1]],
-            []
-        ],
-        [
-            ["all"],
-            _items + _medicine, //items
-            _linkItems //link items
-        ],
-        [
-            ["officer", "squad leader", "team leader"],
-            [["murshun_cigs_lighter", 1]],
-            []
-        ],
-        [
-            ["combat life saver"],
-            _medicMedicine,
-            []
-        ],
-        [
-            ["engineer"],
-            [["ACE_M26_Clacker", 1], ["ACE_DefusalKit", 1], ["DemoCharge_Remote_Mag", 2]],
-            []
-        ],
-        [
-            ["missile specialist (at)"],
-            [],
-            []
-        ],
-        [
-            ["missile specialist (aa)"],
-            [],
-            []
-        ],
-        [
-            ["autorifleman"],
-            [],
-            []
-        ],
-        [
-            ["rifleman (at)"],
-            [],
-            []
-        ],
-        [
-            ["pilot", "helicopter pilot", "crewman", "helicopter crew"],
-            [["ToolKit", 1]],
-            ["ItemGPS"]
-        ],
-        [
-            ["grenadier"],
-            [],
-            []
-        ],
-        [
-            ["rifleman"],
-            [],
-            []
-        ]
-    ], //personal items per class
-    _boxItems + _boxMedicine,
-    _identity
+
+[
+
+ // Uniforms per class
+
+  [
+
+    ["officer", "squad leader"],
+
+[
+
+    _squadLeaderFashion,
+
+    [_squadLeaderPrimary, _squadLeaderSecondary, _squadLeaderLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["combat life saver"],
+
+[
+
+    _combatLifeSaverFashion,
+
+    [_combatLifeSaverPrimary, _combatLifeSaverSecondary, _combatLifeSaverLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["engineer"],
+
+[
+
+    _engineerFashion,
+
+    [_engineerPrimary, _engineerSecondary, _engineerLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["team leader"],
+
+[
+
+    _teamLeaderFashion,
+
+    [_teamLeaderPrimary, _teamLeaderSecondary, _teamLeaderLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["missile specialist (at)"],
+
+[
+
+    _missileSpecialistATFashion,
+
+    [_missileSpecialistATPrimary, _missileSpecialistATSecondary, _missileSpecialistATLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["missile specialist (aa)"],
+
+[
+
+    _missileSpecialistAAFashion,
+
+    [_missileSpecialistAAPrimary, _missileSpecialistAASecondary, _missileSpecialistAALauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["autorifleman"],
+
+[
+
+    _autoriflemanFashion,
+
+    [_autoriflemanPrimary, _autoriflemanSecondary, _autoriflemanLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["rifleman (at)"],
+
+[
+
+    _riflemanATFashion,
+
+    [_riflemanATPrimary, _riflemanATSecondary, _riflemanATLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["pilot", "helicopter pilot"],
+
+[
+
+    _pilotFashion,
+
+    [_pilotPrimary, _pilotSecondary, _pilotLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["crewman", "helicopter crew"],
+
+[
+
+    _crewmanFashion,
+
+    [_crewmanPrimary, _crewmanSecondary, _crewmanLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["grenadier"],
+
+[
+
+    _grenadierFashion,
+
+    [_grenadierPrimary, _grenadierSecondary, _grenadierLauncher]
+
+]
+
+],
+
+
+
+  [
+
+    ["rifleman"],
+
+[
+
+    _riflemanFashion,
+
+    [_riflemanPrimary, _riflemanSecondary, _riflemanLauncher]
+
+]
+
+]
+
+], // Equipment per class
+
+[
+
+
+
+  [
+
+    ["officer", "squad leader"],
+
+    _squadLeaderItems,
+
+    _squadLeaderLinkItems
+
+  ],
+
+  [
+
+    ["combat life saver"],
+
+    _combatLifeSaverItems,
+
+    _combatLifeSaverLinkItems
+
+  ],
+
+  [
+
+    ["engineer"],
+
+    _engineerItems,
+
+    _engineerLinkItems
+
+  ],
+
+  [
+
+    ["team leader"],
+
+    _teamLeaderItems,
+
+    _teamLeaderLinkItems
+
+  ],
+
+  [
+
+    ["missile specialist (at)"],
+
+    _missileSpecialistATItems,
+
+    _missileSpecialistATLinkItems
+
+  ],
+
+  [
+
+    ["missile specialist (aa)"],
+
+    _missileSpecialistAAItems,
+
+    _missileSpecialistAALinkItems
+
+  ],
+
+  [
+
+    ["autorifleman"],
+
+    _autoriflemanItems,
+
+    _autoriflemanLinkItems
+
+  ],
+
+  [
+
+    ["rifleman (at)"],
+
+    _riflemanATItems,
+
+    _riflemanATLinkItems
+
+  ],
+
+  [
+
+    ["pilot", "helicopter pilot"],
+
+    _pilotItems,
+
+    _pilotLinkItems
+
+  ],
+
+  [
+
+    ["crewman", "helicopter crew"],
+
+    _crewmanItems,
+
+    _crewmanLinkItems
+
+  ],
+
+  [
+
+    ["grenadier"],
+
+    _grenadierItems,
+
+    _grenadierLinkItems
+
+  ],
+
+  [
+
+    ["rifleman"],
+
+    _riflemanItems,
+
+    _riflemanLinkItems
+
+  ]
+
+],
+
+// Personal items per class
+
+ _boxItems + _boxMedicine 
+
 ];
 
 //output of the function, do not remove or change
+
 _loadoutArray
+
+
+
+
+
