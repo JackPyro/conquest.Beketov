@@ -3,7 +3,7 @@
 
 //framework
 klpq_framework_enable = true;
-mf_customEnemyLoadouts = false;
+mf_customEnemyLoadouts = true;
 mf_onlyPilotsCanFly = false;
 mf_forceSideNVGs = [];
 mf_forceVirtualArsenal = false;
